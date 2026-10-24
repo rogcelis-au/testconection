@@ -1,0 +1,19 @@
+---
+- name: Test Nutanix Connectivity
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Query Prism Central cluster information
+      nutanix.ncp.ntnx_clusters_info:
+        nutanix_host: "{{ nutanix_host }}"
+        nutanix_username: "{{ nutanix_username }}"
+        nutanix_password: "{{ nutanix_password }}"
+        validate_certs: "{{ validate_certs }}"
+      register: cluster_info
+
+    - name: Display cluster information
+      debug:
+        var: cluster_info
