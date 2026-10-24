@@ -1,0 +1,34 @@
+---
+- name: Create Nutanix VM
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+    - name: Create VM
+      nutanix.ncp.ntnx_vms:
+        state: present
+
+        nutanix_host: "{{ nutanix_host }}"
+        nutanix_username: "{{ nutanix_username }}"
+        nutanix_password: "{{ nutanix_password }}"
+        validate_certs: "{{ validate_certs }}"
+
+        name: "{{ vm_name }}"
+        description: "{{ vm_description }}"
+
+        cluster:
+          name: "{{ cluster_name }}"
+
+        num_vcpus_per_socket: "{{ cpu }}"
+        num_sockets: 1
+
+        memory_size_mib: "{{ memory_mb }}"
+
+        disks:
+          - image:
+              name: "{{ image_name }}"
+
+        nics:
+          - subnet:
+              name: "{{ subnet_name }}"
