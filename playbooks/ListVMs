@@ -1,0 +1,16 @@
+---
+- name: Get VMs
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Get VMs
+      nutanix.ncp.ntnx_vms_info:
+        nutanix_host: "{{ nutanix_host }}"
+        nutanix_username: "{{ nutanix_username }}"
+        nutanix_password: "{{ nutanix_password }}"
+        validate_certs: "{{ validate_certs }}"
+      register: vm_info
+
+    - debug:
+        var: vm_info
