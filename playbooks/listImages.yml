@@ -1,0 +1,16 @@
+---
+- name: Get Images
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Get images
+      nutanix.ncp.ntnx_images_info:
+        nutanix_host: "{{ nutanix_host }}"
+        nutanix_username: "{{ nutanix_username }}"
+        nutanix_password: "{{ nutanix_password }}"
+        validate_certs: "{{ validate_certs }}"
+      register: image_info
+
+    - debug:
+        var: image_info
