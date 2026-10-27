@@ -15,20 +15,16 @@
         validate_certs: "{{ validate_certs }}"
 
         name: "{{ vm_name }}"
-        description: "{{ vm_description }}"
+        desc: "{{ vm_description }}"
 
         cluster:
           name: "{{ cluster_name }}"
 
-        num_vcpus_per_socket: "{{ cpu }}"
-        num_sockets: 1
+        vcpus: 1
+        cores_per_vcpu: "{{ cpu }}"
 
-        memory_size_mib: "{{ memory_mb }}"
+        memory_gb: "{{ (memory_mb | int / 1024) | int }}"
 
-        disks:
-          - image:
-              name: "{{ image_name }}"
-
-        nics:
+        networks:
           - subnet:
               name: "{{ subnet_name }}"
